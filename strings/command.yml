@@ -13,8 +13,8 @@
 
 # Bot Commands
 PING_COMMAND : ["ping"]
-START_COMMAND : ["start"]
-HELP_COMMAND : ["help"]
+START_COMMAND : ["astart"]
+HELP_COMMAND : ["ahelp"]
 SETTINGS_COMMAND : ["settings", "setting"]
 RELOAD_COMMAND : ["admincache", "reload"]
 GSTATS_COMMAND : ["gstats"]
@@ -105,8 +105,8 @@ BLOCKED_COMMAND : ["blockedusers"]
 SPEEDTEST_COMMAND : ["speedtest"]
 
 #Voice chat commands
-ACTIVEVC_COMMAND : ["activevoice","activevc"]
-ACTIVEVIDEO_COMMAND : ["activevideo","activevd"]
+ACTIVEVC_COMMAND : ["os","activevc"]
+ACTIVEVIDEO_COMMAND : ["vc","activevd"]
 
 #Gban Commands
 GBAN_COMMAND : ["gban"]
