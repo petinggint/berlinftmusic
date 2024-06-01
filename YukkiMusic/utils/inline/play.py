@@ -255,6 +255,7 @@ def slider_markup(_, videoid, user_id, query, query_type, channel, fplay):
         [
              InlineKeyboardButton(
                 text=_["CLOSE_BUTTON"], callback_data=f"forceclose {query}|{user_id}"
+             ),
         ],
     ]
     return buttons
