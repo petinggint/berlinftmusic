@@ -246,7 +246,6 @@ def slider_markup(_, videoid, user_id, query, query_type, channel, fplay):
                 text="❮",
                 callback_data=f"slider B|{query_type}|{query}|{user_id}|{channel}|{fplay}",
             ),
-            ),
             InlineKeyboardButton(
                 text="❯",
                 callback_data=f"slider F|{query_type}|{query}|{user_id}|{channel}|{fplay}",
