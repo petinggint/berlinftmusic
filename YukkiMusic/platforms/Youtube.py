@@ -1,13 +1,3 @@
-#
-# Copyright (C) 2021-present by TeamYukki@Github, < https://github.com/TeamYukki >.
-#
-# This file is part of < https://github.com/TeamYukki/YukkiMusicBot > project,
-# and is released under the "GNU v3.0 License Agreement".
-# Please see < https://github.com/TeamYukki/YukkiMusicBot/blob/master/LICENSE >
-#
-# All rights reserved.
-#
-
 import asyncio
 import os
 import re
@@ -76,7 +66,7 @@ class YouTubeAPI:
                         return entity.url
         if offset in (None,):
             return None
-        return text[offset : offset + length]
+        return text[offset: offset + length]
 
     async def details(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
@@ -125,28 +115,27 @@ class YouTubeAPI:
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
         return thumbnail
 
-   async def video(self, link: str, videoid: Union[bool, str] = None):
-    if videoid:
-        link = self.base + link
-    if "&" in link:
-        link = link.split("&")[0]
-    proc = await asyncio.create_subprocess_exec(
-        "yt-dlp",
-        "--force-ipv4",
-        "--no-check-certificate",
-        "-g",
-        "-f",
-        "best",
-        f"{link}",
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    stdout, stderr = await proc.communicate()
-    if stdout:
-        return 1, stdout.decode().split("\n")[0]
-    else:
-        return 0, stderr.decode()
-
+    async def video(self, link: str, videoid: Union[bool, str] = None):
+        if videoid:
+            link = self.base + link
+        if "&" in link:
+            link = link.split("&")[0]
+        proc = await asyncio.create_subprocess_exec(
+            "yt-dlp",
+            "--force-ipv4",
+            "--no-check-certificate",
+            "-g",
+            "-f",
+            "best",
+            f"{link}",
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await proc.communicate()
+        if stdout:
+            return 1, stdout.decode().split("\n")[0]
+        else:
+            return 0, stderr.decode()
 
     async def playlist(self, link, limit, user_id, videoid: Union[bool, str] = None):
         if videoid:
@@ -273,62 +262,61 @@ class YouTubeAPI:
             return xyz
 
         def video_dl():
-    ydl_optssx = {
-        "format": "bestvideo+bestaudio",
-        "outtmpl": "downloads/%(id)s.%(ext)s",
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-        "quiet": True,
-        "no_warnings": True,
-        "force_ip_version": "4",
-    }
-    x = YoutubeDL(ydl_optssx)
-    info = x.extract_info(link, False)
-    xyz = os.path.join("downloads", f"{info['id']}.{info['ext']}")
-    if os.path.exists(xyz):
-        return xyz
-    x.download([link])
-    return xyz
-
-def song_video_dl():
-    formats = f"{format_id}+140"
-    fpath = f"downloads/{title}"
-    ydl_optssx = {
-        "format": formats,
-        "outtmpl": fpath,
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-        "quiet": True,
-        "no_warnings": True,
-        "prefer_ffmpeg": True,
-        "merge_output_format": "mp4",
-        "force_ip_version": "4",
-    }
-    x = YoutubeDL(ydl_optssx)
-    x.download([link])
-
-def song_audio_dl():
-    fpath = f"downloads/{title}.%(ext)s"
-    ydl_optssx = {
-        "format": format_id,
-        "outtmpl": fpath,
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-        "quiet": True,
-        "no_warnings": True,
-        "prefer_ffmpeg": True,
-        "postprocessors": [
-            {
-                "key": "FFmpegExtractAudio",
-                "preferredcodec": "mp3",
-                "preferredquality": "192",
+            ydl_optssx = {
+                "format": "bestvideo+bestaudio",
+                "outtmpl": "downloads/%(id)s.%(ext)s",
+                "geo_bypass": True,
+                "nocheckcertificate": True,
+                "quiet": True,
+                "no_warnings": True,
+                "force_ip_version": "4",
             }
-        ],
-        "force_ip_version": "4",
-    }
-    x = YoutubeDL(ydl_optssx)
-    x.download([link])
+            x = YoutubeDL(ydl_optssx)
+            info = x.extract_info(link, False)
+            xyz = os.path.join("downloads", f"{info['id']}.{info['ext']}")
+            if os.path.exists(xyz):
+                return xyz
+            x.download([link])
+            return xyz
 
+        def song_video_dl():
+            formats = f"{format_id}+140"
+            fpath = f"downloads/{title}"
+            ydl_optssx = {
+                "format": formats,
+                "outtmpl": fpath,
+                "geo_bypass": True,
+                "nocheckcertificate": True,
+                "quiet": True,
+                "no_warnings": True,
+                "prefer_ffmpeg": True,
+                "merge_output_format": "mp4",
+                "force_ip_version": "4",
+            }
+            x = YoutubeDL(ydl_optssx)
+            x.download([link])
+
+        def song_audio_dl():
+            fpath = f"downloads/{title}.%(ext)s"
+            ydl_optssx = {
+                "format": format_id,
+                "outtmpl": fpath,
+                "geo_bypass": True,
+                "nocheckcertificate": True,
+                "quiet": True,
+                "no_warnings": True,
+                "prefer_ffmpeg": True,
+                "postprocessors": [
+                    {
+                        "key": "FFmpegExtractAudio",
+                        "preferredcodec": "mp3",
+                        "preferredquality": "192",
+                    }
+                ],
+                "force_ip_version": "4",
+            }
+            x = YoutubeDL(ydl_optssx)
+            x.download([link])
 
         if songvideo:
             await loop.run_in_executor(None, song_video_dl)
