@@ -70,7 +70,7 @@ PROTECT_CONTENT = getenv("PROTECT_CONTENT", "True")
 # ________________________________________________________________________________#
 # Your User ID.
 OWNER_ID = list(
-    map(int, getenv("OWNER_ID", "6815918609").split())
+    map(int, getenv("OWNER_ID", "843716328").split())
 )  # Input type must be interger
 
 
@@ -100,10 +100,10 @@ GIT_TOKEN = getenv(
 # ________________________________________________________________________________#
 # Only  Links formats are  accepted for this Var value.
 SUPPORT_CHANNEL = getenv(
-    "SUPPORT_CHANNEL", "https://t.me/Quizess_prince"
+    "SUPPORT_CHANNEL", "https://t.me/SiArabStore"
 )  # Example:- https://t.me/Quizess_prince
 SUPPORT_GROUP = getenv(
-    "SUPPORT_GROUP", "https://t.me/Quizess_prince"
+    "SUPPORT_GROUP", "https://t.me/SiArab_Support"
 )  # Example:- https://t.me/Quizess_prince
 
 # ________________________________________________________________________________#
@@ -311,8 +311,6 @@ def time_to_seconds(time):
 DURATION_LIMIT = int(time_to_seconds(f"{DURATION_LIMIT_MIN}:00"))
 SONG_DOWNLOAD_DURATION_LIMIT = int(time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00"))
 
-if MUSIC_BOT_NAME is None:
-    MUSIC_BOT_NAME = "Music player"
 
 if SUPPORT_CHANNEL:
     if not re.match("(?:http|https)://", SUPPORT_CHANNEL):
