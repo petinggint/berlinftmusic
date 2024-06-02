@@ -1,4 +1,5 @@
 from pyrogram import filters
+from TheApi import api as aapi
 
 from config import LOG_GROUP_ID
 from YukkiMusic import api, app
@@ -7,8 +8,8 @@ from YukkiMusic import api, app
 @app.on_message(filters.command("advice"))
 async def advice(_, message):
     A = await message.reply_text("...")
-    res = await api.advice()
-    await A.edit(b["advice"])
+    res = aapi.advice()
+    await A.edit(res["results"])
 
 
 @app.on_message(filters.command("astronomical"))
@@ -25,6 +26,7 @@ async def advice(_, message):
         await app.send_message(LOG_GROUP_ID, "/astronomical not working")
 
 
-__MODULE__ = "Cᴏɴᴛᴇɴᴛ's"
+__MODULE__ = "Aᴅᴠɪᴄᴇ"
 __HELP__ = """
+/advice - Gᴇᴛ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ
 /astronomical - ᴛᴏ ɢᴇᴛ ᴛᴏᴅᴀʏ's ᴀsᴛʀᴏɴᴏᴍɪᴄᴀʟ  ғᴀᴄᴛ"""
