@@ -25,12 +25,8 @@ ACTIVEVC_COMMAND = get_command("ACTIVEVC_COMMAND")
 ACTIVEVIDEO_COMMAND = get_command("ACTIVEVIDEO_COMMAND")
 
 
-@app.on_message(filters.command(ACTIVEVC_COMMAND))
+@app.on_message(filters.command(ACTIVEVC_COMMAND) & SUDOERS)
 async def activevc(_, message: Message):
-    if message.from_user.id not in SUDOERS:
-        return await message.reply_text(
-            "sᴏʀʀʏ sɪʀ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ғᴏʀ ʙᴏᴛ ᴍᴀɪɴᴛᴇɴᴀɴᴀʀ's"
-        )
     mystic = await message.reply_text(
         "ɢᴇᴛᴛɪɴɢ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ....ᴘʟᴇᴀsᴇ ʜᴏʟᴅ ᴏɴ", protect_content=PK
     )
@@ -57,12 +53,8 @@ async def activevc(_, message: Message):
         )
 
 
-@app.on_message(filters.command(ACTIVEVIDEO_COMMAND))
+@app.on_message(filters.command(ACTIVEVIDEO_COMMAND) & SUDOERS)
 async def activevi_(_, message: Message):
-    if message.from_user.id not in SUDOERS:
-        return await message.reply_text(
-            "sᴏʀʀʏ sɪʀ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ғᴏʀ ʙᴏᴛ ᴍᴀɪɴᴛᴇɴᴀɴᴀʀ's"
-        )
     mystic = await message.reply_text(
         "ɢᴇᴛᴛɪɴɢ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ....ᴘʟᴇᴀsᴇ ʜᴏʟᴅ ᴏɴ", protect_content=PK
     )
@@ -89,12 +81,8 @@ async def activevi_(_, message: Message):
         )
 
 
-@app.on_message(filters.command(["ac"]))
+@app.on_message(filters.command(["ac"]) & SUDOERS)
 async def vc(client, message: Message):
-    if message.from_user.id not in SUDOERS:
-        return await message.reply_text(
-            "sᴏʀʀʏ sɪʀ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ғᴏʀ ʙᴏᴛ ᴍᴀɪɴᴛᴇɴᴀɴᴀʀ's"
-        )
     ac_audio = str(len(await get_active_chats()))
     ac_video = str(len(await get_active_video_chats()))
     await message.reply_text(
@@ -102,7 +90,7 @@ async def vc(client, message: Message):
     )
 
 
-__MODULE__ = "Acᴛɪᴠᴇᴠᴄ"
+__MODULE__ = "Acᴛɪᴠᴇ"
 __HELP__ = """📈<u>ᴀᴄᴛɪᴠᴇᴠᴄ Cᴏᴍᴍᴀᴅ:</u>
 /ac - Cʜᴇᴄᴋ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs ᴏɴ ʙᴏᴛ.
 /activevoice - Cʜᴇᴄᴋ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛs ᴀɴᴅ ᴠɪᴅᴇᴏ ᴄᴀʟʟs ᴏɴ ʙᴏᴛ.
