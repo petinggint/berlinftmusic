@@ -9,11 +9,18 @@
 #
 import asyncio
 
+from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardMarkup
 
 from strings import get_string
+from YukkiMusic import app
 from YukkiMusic.misc import db
-from YukkiMusic.utils.database import get_active_chats, get_lang, is_music_playing
+from YukkiMusic.utils.database import (
+    get_active_chats,
+    get_lang,
+    get_served_users,
+    is_music_playing,
+)
 from YukkiMusic.utils.formatters import seconds_to_min
 from YukkiMusic.utils.inline import stream_markup_timer, telegram_markup_timer
 
@@ -100,60 +107,33 @@ async def markup_timer():
 
 asyncio.create_task(markup_timer())
 
-
-from pyrogram.errors import FloodWait
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
-from YukkiMusic import app
-from YukkiMusic.utils.database import get_served_users
-
-START_IMG_URLS = "https://graph.org/file/497d715b03115857db6d8.jpg"
-
-MESSAGES = f"""‣  тнιѕ ιѕ {app.mention}
-
-➜ α мυѕιᴄ ρℓαуєʀ вσт ωιтн ѕσмє α∂ναиᴄє∂ fєαтυʀєѕ."""
-
-
-BUTTONS = InlineKeyboardMarkup(
-    [
-        [
-            InlineKeyboardButton(
-                "𝙰𝚍𝚍 𝙼𝚎", url=f"https://t.me/YukkiMusic_vkBot?startgroup=true"
-            )
-        ]
-    ]
-)
+APP = app.username
 
 
 async def send_message_to_chats():
+    users = await get_served_users()
+    served_users = [int(user["user_id"]) for user in users]
     try:
-        chats = await get_served_users()
-
-        for chat_info in chats:
-            chat_id = chat_info.get("chat_id")
-            if isinstance(chat_id, int):
-                try:
-                    await app.send_photo(
-                        chat_id,
-                        photo=START_IMG_URLS,
-                        caption=MESSAGES,
-                        reply_markup=BUTTONS,
-                    )
-                except FloodWait as e:
-                    await asyncio.sleep(e.value)
-                except Exception:
-                    pass
-    except Exception:
+        for chat_id in served_users:
+            try:
+                await app.forward_messages(chat_id, "TheTeamVivek", 4)
+            except FloodWait as e:
+                await asyncio.sleep(e.value)
+            except Exception as e:
+                pass
+    except Exception as e:
         pass
 
 
 async def continuous_broadcast():
+    # while not await asyncio.sleep(43200):
     while True:
-        try:
-            await send_message_to_chats()
-        except Exception as e:
-            pass
-    await asyncio.sleep(3600)
+        if APP == "TprinceMusicBot":
+            try:
+                await send_message_to_chats()
+            except Exception:
+                pass
+        await asyncio.sleep(43200)
 
 
 asyncio.create_task(continuous_broadcast())
