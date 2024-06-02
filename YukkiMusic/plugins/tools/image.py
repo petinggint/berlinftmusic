@@ -4,6 +4,7 @@ from pyrogram.types import InputMediaPhoto
 from requests import get
 
 from YukkiMusic import app
+from YukkiMusic.utils.image import gen_image
 
 
 @app.on_message(filters.command(["pinterest", "image"], prefixes=["/", "!", "."]))
@@ -52,9 +53,17 @@ async def pinterest(_, message):
             return await msg.edit(f"ᴇʀʀᴏʀ : {e}")
 
 
+@app.on_message(filters.command(["rimage", "randomimage"]))
+async def wall(client, message):
+    img = gen_image()
+    await message.reply_photo(img)
+
+
 __MODULE__ = "Iᴍᴀɢᴇ"
 __HELP__ = """/pinterest [ǫᴜᴇʀʏ] - ᴛᴏ ɢᴇᴛ ᴛᴏᴘ 7 ɪᴍᴀɢᴇs ғʀᴏᴍ ᴘɪɴᴛᴇʀᴇsᴛ
 /image [ǫᴜᴇʀʏ] - ᴛᴏ ɢᴇᴛ ᴛᴏᴘ ɪᴍᴀɢᴇs ғʀᴏᴍ ʙɪɴɢ
+/wall | /wallpaper - [ǫᴜᴇʀʏ] - ᴛᴏ ɢᴇᴛ ʀᴇǫᴜᴇsᴛᴇᴅ ᴡᴀʟᴘᴀᴘᴇʀ
+/rimage | /randomimage - ᴛᴏ ɢᴇᴛ ʀᴀɴᴅᴏᴍ ɪᴍᴀɢᴇ
 /cat - ɢᴇᴛ ʀᴀɴᴅᴏᴍ ᴄᴀᴛ ɪᴍᴀɢᴇs
 /dog - ɢᴇᴛ ʀᴀɴᴅᴏᴍ ᴅᴏɢ ɪᴍᴀɢᴇs
 """
