@@ -1,13 +1,21 @@
 from bing_image_urls import bing_image_urls
 from pyrogram import filters
-from pyrogram.types import InputMediaPhoto
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InputMediaPhoto,
+)
 from requests import get
 
+from config import BANNED_USERS
 from YukkiMusic import app
 from YukkiMusic.utils.image import gen_image
 
 
-@app.on_message(filters.command(["pinterest", "image"], prefixes=["/", "!", "."]))
+@app.on_message(
+    filters.command(["pinterest", "image"], prefixes=["/", "!", "."]) & ~BANNED_USERS
+)
 async def pinterest(_, message):
     command = message.text.split()[0][1:]
     chat_id = message.chat.id
@@ -53,10 +61,27 @@ async def pinterest(_, message):
             return await msg.edit(f"ᴇʀʀᴏʀ : {e}")
 
 
-@app.on_message(filters.command(["rimage", "randomimage"]))
+re_keyboard = InlineKeyboardMarkup(
+    [
+        [InlineKeyboardButton(text="Rᴇғʀᴇsʜ", callback_data="randomimagerefresh")],
+        [InlineKeyboardButton(text="〆 ᴄʟᴏsᴇ 〆", callback_data="close")],
+    ]
+)
+
+
+@app.on_message(filters.command(["rimage", "randomimage"]) & ~BANNED_USERS)
 async def wall(client, message):
     img = gen_image()
-    await message.reply_photo(img)
+    await message.reply_photo(img, reply_markup=re_keyboard)
+
+
+@app.on_callback_query(filters.regex("randomimagerefresh") & ~BANNED_USERS)
+async def refresh_cat(c, m: CallbackQuery):
+    img = gen_image()
+    await m.edit_message_media(
+        InputMediaPhoto(media=img),
+        reply_markup=re_keyboard,
+    )
 
 
 __MODULE__ = "Iᴍᴀɢᴇ"
