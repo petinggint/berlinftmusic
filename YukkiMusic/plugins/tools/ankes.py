@@ -14,8 +14,10 @@ from YukkiMusic.utils.database import add_served_chat
 from pyrogram.enums import ChatMemberStatus
 from config import MONGO_DB_URI
 
+from motor.motor_asyncio import AsyncIOMotorClient  # Import the correct class
+
 # Instantiate the MongoDB client
-mongo_client = MongoCli(MONGO_DB_URI)  # Ensure MongoCli is correctly instantiated
+mongo_client = AsyncIOMotorClient(MONGO_DB_URI)  # Ensure MongoCli is correctly instantiated
 db = mongo_client["DOR"]
 user_collection = db["user_dia"]
 gc = db["listgrup"]
