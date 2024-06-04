@@ -144,12 +144,12 @@ async def checkstatus(client, message):
     else:
         await message.reply_text(f"{Q}**anda belum mengaktifkan antigcast**{gagal}", quote=True)
 
-@app.on_message(filters.command("aktifkan") & ~filters.private)
+@app.on_message(filters.command("prem") & ~filters.private)
 async def enable_blacklist(c, m):
     await set_blacklist_status(c.me.id, True)
     await m.reply_text(f"{Q}**antigcast user berhasil di aktifkan** {on}", quote=True)
 
-@app.on_message(filters.command("matikan") & ~filters.private)
+@app.on_message(filters.command("unprem") & ~filters.private)
 async def disable_blacklist(c, m):
     await set_blacklist_status(c.me.id, False)
     await m.reply_text(f"{Q}**antigcast user berhasil di matikan** {off}", quote=True)
@@ -289,3 +289,21 @@ async def delete_messages(client, message):
                     break
     except BaseException as e:
         print(f"Error: {e}")
+
+__MODULE__ = "ᴀɴᴛɪɢᴄᴀꜱᴛ"
+__HELP__ = """
+ɪɴꜰᴏ ᴄᴏᴍᴍᴀɴᴅꜱ:
+
+✱ /prem : ᴜɴᴛᴜᴋ ᴍᴇɴɢʜɪᴅᴜᴘᴋᴀɴ ᴀɴᴛɪɢᴄᴀꜱᴛ ᴅɪ ɢʀᴏᴜᴘ
+✱ /unprem : ᴜɴᴛᴜᴋ ᴍᴇɴᴏɴᴀᴋᴛɪꜰᴋᴀɴ ᴀɴᴛɪɢᴄᴀꜱᴛ ᴅɪ ɢʀᴏᴜᴘ
+✱ /liat : ᴜɴᴛᴜᴋ ᴍᴇʟɪʜᴀᴛ ᴀᴘᴀᴋᴀʜ ᴀɴᴛɪɢᴄᴀꜱᴛ ᴛᴇʟᴀʜ ᴅɪ ᴀᴋᴛɪꜰᴋᴀɴ
+✱ /addgc : ᴜɴᴛᴜᴋ ᴍᴇɴᴀᴍʙᴀʜ ɢʀᴜᴘ ꜱᴇʙᴀɢᴀɪ ᴀɴᴛɪɢᴄᴀꜱᴛ
+✱ /hapusgc : ᴜɴᴛᴜᴋ ᴍᴇɴɢʜᴀᴘᴜꜱ ɢʀᴜᴘ ꜱᴇʙᴀɢᴀɪ ᴀɴᴛɪɢᴄᴀꜱᴛ
+✱ /listgc : ᴜɴᴛᴜᴋ ᴍᴇʟɪʜᴀᴛ ᴅᴀꜰᴛᴀʀ ɢʀᴏᴜᴘ ʏᴀɴɢ ᴍᴇɴɢᴀᴋᴛɪꜰᴋᴀɴ ᴀɴᴛɪɢᴄᴀꜱᴛ
+✱ /bl : ᴜɴᴛᴜᴋ ᴍᴇɴᴀᴍʙᴀʜᴋᴀɴ ᴋᴀᴛᴀ-ᴋᴀᴛᴀ / ᴛʀɪɢɢᴇʀ ʙʟᴀᴄᴋʟɪꜱᴛ ᴅɪ ɢʀᴏᴜᴘ ᴄʜᴀᴛ.
+✱ /unbl : ᴜɴᴛᴜᴋ ᴍᴇɴɢʜᴀᴘᴜꜱ ᴋᴀᴛᴀ-ᴋᴀᴛᴀ / ᴛʀɪɢɢᴇʀ ʙʟᴀᴄᴋʟɪꜱᴛ ᴅɪ ɢʀᴏᴜᴘ ᴄʜᴀᴛ.
+✱ /cekbl : ᴜɴᴛᴜᴋ ᴍᴇɴɢᴇᴄᴇᴋ ᴅᴀꜰᴛᴀʀ ᴋᴀᴛᴀ ʏɢ ᴅɪ ʙʟᴀᴄᴋʟɪꜱᴛ
+✱ /duar :  ᴜɴᴛᴜᴋ ᴍᴇɴᴀᴍʙᴀʜᴋᴀɴ ɪᴅᴜꜱᴇʀ ᴋᴇᴅᴀʟᴀᴍ ᴅᴀᴛᴀʙᴀꜱᴇ ᴀɢᴀʀ ꜱᴇᴍᴜᴀ ᴘᴇꜱᴀɴ ᴅᴀʀɪ ɪᴅᴜꜱᴇʀ ᴛᴇʀꜱᴇʙᴜᴛ ᴀᴋᴀɴ ᴅɪ ʜᴀᴘᴜꜱ.
+✱ /unduar : ᴜɴᴛᴜᴋ ᴍᴇɴɢʜᴀᴘᴜꜱ ɪᴅᴜꜱᴇʀ ᴋᴇᴅᴀʟᴀᴍ ᴅᴀᴛᴀʙᴀꜱᴇ ᴀɢᴀʀ ꜱᴇᴍᴜᴀ ᴘᴇꜱᴀɴ ᴅᴀʀɪ ɪᴅᴜꜱᴇʀ ᴛᴇʀꜱᴇʙᴜᴛ ᴀᴋᴀɴ ᴅɪ ʜᴀᴘᴜꜱ.
+✱ /listduar : ʟɪʜᴀᴛ ᴋᴀᴛᴀ-ᴋᴀᴛᴀ ʏᴀɴɢ ᴍᴀꜱᴜᴋ ᴅᴀꜰᴛᴀʀ ʜɪᴛᴀᴍ ꜱᴀᴀᴛ ɪɴɪ.'''
+"""
