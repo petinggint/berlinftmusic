@@ -15,7 +15,7 @@ from pyrogram.enums import ChatMemberStatus
 from config import MONGO_DB_URI
 
 # Instantiate the MongoDB client
-mongo_client = MongoCli(MONGO_DB_URI)  # Ensure MongoCli is correctly instantiated
+mongo_client = MongoClient(MONGO_DB_URI)  # Ensure MongoCli is correctly instantiated
 db = mongo_client["DOR"]
 user_collection = db["user_dia"]
 gc = db["listgrup"]
