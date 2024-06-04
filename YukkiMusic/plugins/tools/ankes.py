@@ -9,7 +9,7 @@ from pyrogram import filters, enums
 from pyrogram.enums import ChatType
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
 
-YukkiMusic.core.mongo import mongodb  # Assuming this is a class that needs to be instantiated
+from YukkiMusic.core.mongo import mongodb  # Assuming this is a class that needs to be instantiated
 from YukkiMusic.utils.database import add_served_chat
 from pyrogram.enums import ChatMemberStatus
 from config import MONGO_DB_URI
