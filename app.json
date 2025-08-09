@@ -61,7 +61,7 @@
       },
       "UPSTREAM_REPO": {
         "description": "If you dont know this, Leave as it is",
-        "value": "https://github.com/",
+        "value": "https://github.com/petinggint/berlinftmusic",
         "required": true
       },
       "UPSTREAM_BRANCH": {
